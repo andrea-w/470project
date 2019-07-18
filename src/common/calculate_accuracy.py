@@ -3,8 +3,8 @@ import pandas
 def calculate_accuracy():
     return
 
-# returns the Mean Squared Error for an arraylist of predicted test scores
-# against the arraylist of the actual test scores
+# returns the Mean Squared Error for a pandas Series of predicted test scores
+# against the Series of the actual test scores
 def calculate_MSE(actual_scores, predicted_scores):
     # first perform error checking
     if (actual_scores.len() != predicted_scores.len()):
