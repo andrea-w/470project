@@ -1,6 +1,7 @@
 import sys
-from common.normalization_dim_reduction import *
-from common.preprocess import *
+from src.common.normalization_dim_reduction import *
+from src.common.preprocess import *
+from src.ga.random.main import *
 
 def main():
     data = load_data_file(sys.argv[1])
@@ -18,6 +19,8 @@ def main():
     print("Modified dataframe has " + str(data.shape[1]) + " columns.")
     print("There should be 9 additional columns.")
     training_data, test_data = split_into_training_and_test(data)
+
+    perform_ga_rand_init(training_data)
 
 if __name__ == "__main__":
     main()

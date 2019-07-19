@@ -4,13 +4,12 @@ import numpy as np
 """
 Creates a pandas Series (1-dimensional column with labels)
 to represent a candidate genotype
-Takes pandas dataframe as @param
+Takes list of column labels as @param
+and list of weights (values) as second @param
 """
-def encode_genotype(dataframe):
-    # get list of column labels from dataframe of imported CSV file
-    labels = [dataframe.columns]
-    # TODO set values for weights of features - may be random or may be set
-    data = np.array([])
+def encode_genotype(labels, values):
+    # set values for weights of features - may be random or may be set
+    data = np.array([values])
 
     s = pd.Series(data, index=labels)
     return s
