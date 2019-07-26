@@ -3,8 +3,6 @@ This script contains various functions that may be used to
 normalize certain data features, or to reduce the dimensionality
 of the data by combining 2 or more features into 1.
 """
-import pandas
-
 
 # takes dataframe as input @param data
 # adds new column to dataframe representing total spending per student
@@ -31,14 +29,14 @@ def support_services_spending_ratio(data):
 # adds new column to dataframe representing ratio of capital expenditure over total expenditure
 # (calculates capital_expenditure/total_expenditure)
 def capital_expenditure_ratio(data):
-    new_df = data.assign(Capital_Expenditure_Ratio = lambda x: x.CAPITAL_EXPENDITURE/x.TOTAL_EXPENDITURE if 'CAPITAL_EXPENDITURE' in x.index else 0)
+    new_df = data.assign(Capital_Expenditure_Ratio = lambda x: x.CAPITAL_OUTLAY_EXPENDITURE/x.TOTAL_EXPENDITURE if 'CAPITAL_OUTLAY_EXPENDITURE' in x.columns else 0)
     return new_df
 
 # takes dataframe as input @param data
 # adds new column to dataframe representing ratio of other expenditure over total expenditure
 # (calculates other_expenditure/total_expenditure)
 def other_expenditure_ratio(data):
-    new_df = data.assign(Other_Expenditure_Ratio = lambda x: x.OTHER_EXPENDITURE/x.TOTAL_EXPENDITURE if 'OTHER_EXPENDTURE' in x.index else 0)
+    new_df = data.assign(Other_Expenditure_Ratio = lambda x: x.OTHER_EXPENDITURE/x.TOTAL_EXPENDITURE if 'OTHER_EXPENDITURE' in x.columns else 0)
     return new_df
 
 # takes dataframe as input @param data

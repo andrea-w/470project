@@ -7,9 +7,12 @@ to represent a candidate genotype
 Takes list of column labels as @param
 and list of weights (values) as second @param
 """
-def encode_genotype(labels, values):
+def encode_genotype(labels, values, name):
     # set values for weights of features - may be random or may be set
-    data = np.array([values])
+    data = np.array(values)
 
-    s = pd.Series(data, index=labels)
+    s = pd.Series(data, index=labels, name=name)
+    #s = s.drop(['STATE'])
+    s['STATE'] = 0
+    s = s.fillna(0)
     return s

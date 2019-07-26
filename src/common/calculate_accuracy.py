@@ -1,6 +1,10 @@
-import pandas
+import pandas as pd
 
-def calculate_accuracy():
+# creates a new dataframe to store the accuracy scores for each candidate genotype
+# compared to the actual test scores for the PK (state,year)
+
+def calculate_accuracy(predicted_scores_df):
+    accuracy_df = pd.DataFrame(columns=predicted_scores_df.columns)
     return
 
 # returns the Mean Squared Error for a pandas Series of predicted test scores
