@@ -12,7 +12,5 @@ def encode_genotype(labels, values, name):
     data = np.array(values)
 
     s = pd.Series(data, index=labels, name=name)
-    #s = s.drop(['STATE'])
-    s['STATE'] = 0
     s = s.fillna(0)
     return s
