@@ -7,13 +7,16 @@ import pandas as pd
 
 # list of labels in dataframe that are important for data analysis
 # (and therefore should have weights assigned to them)
-# possible TODO - normalize grades_x_G / enroll
 # possible TODO - normalize avg test scores
 COLUMNS_OF_INTEREST_DATA = ['STATE', 'YEAR', 'Spend_per_Student', 'Instruction_Spending_Ratio', 'Support_Services_Spending_Ratio', 'Capital_Expenditure_Ratio', 'Other_Expenditure_Ratio', 'Federal_Spending_per_Student',
-                       'State_Spending_per_Student', 'Local_Spending_per_Student', 'Ratio_Budget_Spent', 'GRADES_PK_G', 'GRADES_KG_G', 'GRADES_4_G', 'GRADES_8_G', 'GRADES_12_G', 'GRADES_1_8_G', 'GRADES_9_12_G', 'GRADES_ALL_G']
+                       'State_Spending_per_Student', 'Local_Spending_per_Student', 'Ratio_Budget_Spent', 'PreK_RATIO', 'Kinderg_RATIO', 'Grade_4_RATIO', 'Grade_8_RATIO', 'Grade_12_RATIO', 'Primary_RATIO', 'Secondary_RATIO']
 CANDIDATE_COLUMNS_OF_INTEREST = COLUMNS_OF_INTEREST_DATA.copy()
 CANDIDATE_COLUMNS_OF_INTEREST.remove('STATE')
 TEST_SCORES_COLUMNS = ['AVG_MATH_4_SCORE', 'AVG_MATH_8_SCORE', 'AVG_READING_4_SCORE', 'AVG_READING_8_SCORE']
+
+# standardized test scores marked on range [0, 500] according to government website
+MIN_TEST_SCORE = 0
+MAX_TEST_SCORE = 500
 
 NUM_CANDIDATES_PER_GENERATION = 100
 NUM_GENERATIONS = 10

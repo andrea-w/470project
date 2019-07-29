@@ -14,16 +14,8 @@ import pandas as pd
 
 def main():
     data = preprocess.load_data_file(sys.argv[1])
-    # add additional columns to dataframe
-    data = ndr.spending_per_student(data)
-    data = ndr.instruction_spending_ratio(data)
-    data = ndr.support_services_spending_ratio(data)
-    data = ndr.capital_expenditure_ratio(data)
-    data = ndr.other_expenditure_ratio(data)
-    data = ndr.federal_spending_per_student(data)
-    data = ndr.state_spending_per_student(data)
-    data = ndr.local_spending_per_student(data)
-    data = ndr.ratio_budget_spend(data)
+    # add additional columns to dataframe representing normalized values
+    data = ndr.normalize_all(data)
     preprocess.split_into_training_and_test(data)
 
     rand_main.perform_ga_rand_init()

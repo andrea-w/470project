@@ -5,6 +5,7 @@ import common.calculate_accuracy as ca
 import ga.common.encode_genotype as encode
 from common.predict_test_scores import predict_test_scores
 import config
+import time
 
 
 def perform_ga_rand_init():
@@ -22,9 +23,15 @@ def perform_ga_rand_init():
     with open('candidates.csv', 'w', newline='') as f:
         candidates_df.to_csv(f)
 
-    predicted = predict_test_scores(candidates_df)    
+    start_time = time.time()
+    predicted_df = predict_test_scores(candidates_df) 
+    end_time = time.time()
+    print("time elapsed to complete 1 iteration of predictions: " + str(end_time - start_time))
+
+    return
+    """  
     for g in range(config.NUM_GENERATIONS - 1):
-        ca.calculate_accuracy(predicted)
+        ca.calculate_accuracy(predicted_df)
        # perform_crossover()
        # perform_mutation()
 
@@ -34,3 +41,4 @@ def perform_ga_rand_init():
     ca.calculate_accuracy(predicted)
 
     return candidates_df
+    """

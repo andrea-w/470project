@@ -9,4 +9,4 @@ import random
 # Returns list of random floats of length @param n
 # to be assigned to GA candidate
 def initialization(n):
-    return list(random.random() for i in range(n))
+    return list(random.uniform(-1.0, 1.0) for i in range(n))
