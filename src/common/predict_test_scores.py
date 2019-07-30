@@ -25,7 +25,7 @@ def predict_test_scores(candidates_df):
     # all series will be concatenated to predicted_scores_df at end of loop, since this is computationally quicker
     # than appending one-by-one (as per Pandas documentation)
     list_of_dfs = []
-    for c in range(1,candidates_df.shape[0] + 1):
+    for c in range(1,config.NUM_CANDIDATES_PER_GENERATION + 1):
         list_of_states_for_candidate = []
         for i, row in trimmed_data_df.iterrows():
             prediction = calculate_test_score_for_one_candidate_and_pk(candidates_df.iloc[c-1], row)
@@ -35,7 +35,7 @@ def predict_test_scores(candidates_df):
         candidate_df = pd.concat(list_of_states_for_candidate)
         list_of_dfs.append(candidate_df)
 
-    predicted_scores_df = pd.concat(list_of_dfs, keys=[str(c) for c in range(1, candidates_df.shape[0] + 1)]).reset_index()
+    predicted_scores_df = pd.concat(list_of_dfs)
 
     # TODO delete later
     with open('predicted_scores.csv', 'w', newline='') as f:
