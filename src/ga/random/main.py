@@ -3,6 +3,7 @@ import numpy as np
 import ga.random.initialization as rand_init
 import common.calculate_accuracy as ca
 import ga.common.encode_genotype as encode
+import ga.common.crossover as crossover
 from common.predict_test_scores import predict_test_scores
 import config
 import time
@@ -27,6 +28,8 @@ def perform_ga_rand_init():
     predicted_df = predict_test_scores(candidates_df) 
     end_time = time.time()
     print("time elapsed to complete 1 iteration of predictions: " + str(end_time - start_time))
+    accuracy_df = ca.calculate_accuracy(predicted_df)
+    crossover.roulette_wheel_selection(accuracy_df)
 
     return
     """  

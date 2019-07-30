@@ -36,6 +36,7 @@ def predict_test_scores(candidates_df):
         list_of_dfs.append(candidate_df)
 
     predicted_scores_df = pd.concat(list_of_dfs)
+    predicted_scores_df.set_index(['candidate_id'], inplace=True)
 
     # TODO delete later
     with open('predicted_scores.csv', 'w', newline='') as f:
