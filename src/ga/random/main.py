@@ -24,24 +24,17 @@ def perform_ga_rand_init():
     with open('candidates.csv', 'w', newline='') as f:
         candidates_df.to_csv(f)
 
-    start_time = time.time()
-    predicted_df = predict_test_scores(candidates_df) 
-    end_time = time.time()
-    print("time elapsed to complete 1 iteration of predictions: " + str(end_time - start_time))
-    accuracy_df = ca.calculate_accuracy(predicted_df)
-    crossover.roulette_wheel_selection(accuracy_df)
+    for g in range(config.NUM_GENERATIONS - 1):
+        start_time = time.time()
+        predicted_df = predict_test_scores(candidates_df) 
+        end_time = time.time()
+        print("time elapsed to complete 1 iteration of predictions: " + str(end_time - start_time))
+        accuracy_df = ca.calculate_accuracy(predicted_df)
+        children_df = crossover.set_up_roulette_wheel(candidates_df, accuracy_df)
+
+    # TODO delete writing to csv file - helpful for debugging
+    with open('children.csv', 'w', newline='') as f:
+        children_df.to_csv(f)
 
     return
-    """  
-    for g in range(config.NUM_GENERATIONS - 1):
-        ca.calculate_accuracy(predicted_df)
-       # perform_crossover()
-       # perform_mutation()
 
-    # create dataframe of predicted test scores (4) for each state for each candidate in candidates_df
-    predicted = predict_test_scores(candidates_df)
-    # calculate accuracy of final candidates
-    ca.calculate_accuracy(predicted)
-
-    return candidates_df
-    """

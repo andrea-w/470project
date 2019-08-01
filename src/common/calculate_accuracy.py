@@ -34,9 +34,6 @@ def calculate_accuracy(predicted_scores_df):
     sums = pd.DataFrame(data=accuracy_df.sum(axis=1),columns=['SUM-OF-ROW'])
     accuracy_df = accuracy_df.assign(sum_of_row = sums)
 
-    # TODO delete later
-    print('ACCURACY DATAFRAME:')
-    print(accuracy_df)
     # TODO delete writing to csv file - helpful for debugging
     with open('accuracy.csv', 'w', newline='') as f:
         accuracy_df.to_csv(f)
