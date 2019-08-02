@@ -43,19 +43,6 @@ def split_into_training_and_test(data):
     config.TRAINING_DATA.set_index('PRIMARY_KEY', inplace=True)
     config.TEST_DATA.set_index('PRIMARY_KEY', inplace=True)
 
-    """
-    # add Primary Key to dataframes, where primary key is combination
-    # of state and year
-    pk_training = pd.Series([])
-    for i in range(len(config.TRAINING_DATA)):
-        pk_training[i] = str(config.TRAINING_DATA['YEAR']) + "_" + str(config.TRAINING_DATA['STATE'])
-    config.TRAINING_DATA.insert(0, 'PRIMARY_KEY', pk_training)
-    pk_test = pd.Series([])
-    for i in range(len(config.TEST_DATA)):
-        pk_test[i] = str(config.TEST_DATA['YEAR']) + "_" + str(config.TEST_DATA['STATE'])
-    config.TEST_DATA.insert(0, 'PRIMARY_KEY', pk_test)
-    """
-
     # TODO delete later
     with open('training_data.csv', 'w', newline='') as f:
         config.TRAINING_DATA.to_csv(f)
