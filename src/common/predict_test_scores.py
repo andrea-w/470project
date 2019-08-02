@@ -1,5 +1,6 @@
 import pandas as pd
 import config
+import sys
 
 """
 Creates and returns a "predicted_scores_df" pandas dataframe, consisting of
@@ -28,7 +29,7 @@ def predict_test_scores(candidates_df):
     for c in range(1,config.NUM_CANDIDATES_PER_GENERATION + 1):
         list_of_states_for_candidate = []
         for i, row in trimmed_data_df.iterrows():
-            prediction = calculate_test_score_for_one_candidate_and_pk(candidates_df.iloc[c-1], row)
+            prediction = calculate_test_score_for_one_candidate_and_pk(candidates_df[str(c)], row)
             mse, test_name = find_nearest_test_score(prediction, config.TRAINING_DATA.loc[[row.name], config.TEST_SCORES_COLUMNS])
             s = pd.DataFrame(data={'candidate_id': str(c),'PRIMARY-KEY': row.name,'PREDICTED-SCORE':prediction, 'TEST-NAME':test_name, 'MEAN-SQUARE-ERROR':mse}, index=[row.name])
             list_of_states_for_candidate.append(s)
@@ -49,10 +50,10 @@ def predict_test_scores(candidates_df):
 # Compares value of predicted score to config.MIN_TEST_SCORE and
 # config.MAX_TEST_SCORE. If predicted score outside range, pred_score
 # will be reassigned to either MIN_TEST_SCORE or MAX_TEST_SCORE (whichever is closest).
-# @params:      pk              string indicating the Primary Key from training_data
-#               candidate       pandas series of labelled weights
+# @params:      candidate       pandas series of labelled weights
 def calculate_test_score_for_one_candidate_and_pk(candidate, data_row):
     pred_score = data_row.dot(candidate)
+
     if pred_score < config.MIN_TEST_SCORE:
             pred_score = config.MIN_TEST_SCORE
     elif pred_score > config.MAX_TEST_SCORE:
